@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Web Kelas 8.8</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700&family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      min-height: 100vh;
+      font-family: 'Poppins', sans-serif;
+      background: radial-gradient(ellipse at bottom, #0d1b2a, #000);
+      color: white;
+      overflow-x: hidden;
+    }
+
+    /* Background bintang */
+    .stars {
+      width: 200%;
+      height: 200%;
+      position: fixed;
+      top: 0; left: 0;
+      z-index: -1;
+      overflow: hidden;
+    }
+    .star {
+      position: absolute;
+      width: 2px; height: 2px;
+      background: white;
+      border-radius: 50%;
+      opacity: 0.8;
+      animation: twinkle 3s infinite alternate;
+    }
+    @keyframes twinkle { from {opacity:0.2;} to {opacity:1;} }
+
+    /* Navbar */
+    nav {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%;
+      padding: 10px 34px;
+      display: flex;
+      justify-content: flex-end;
+      background: rgba(20,20,40,0.25);
+      backdrop-filter: blur(12px) saturate(150%);
+      -webkit-backdrop-filter: blur(12px) saturate(150%);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.5);
+      z-index: 100;
+    }
+    nav ul { list-style:none; display:flex; gap:10px; }
+    nav a {
+      font-family:'Poppins',sans-serif;
+      color:#fff;
+      text-decoration:none;
+      font-weight:500;
+      font-size:0.9rem;
+      padding:5px 12px;
+      border-radius:12px;
+      transition: all 0.4s ease;
+      background: rgba(255,255,255,0.08);
+      backdrop-filter: blur(10px) saturate(150%);
+      border:1px solid rgba(255,255,255,0.2);
+      opacity:0;
+      transform:translateX(50px);
+    }
+    nav a:hover {
+      background: rgba(255,255,255,0.2);
+      transform: scale(1.05);
+      box-shadow:0 0 8px rgba(255,255,255,0.3);
+    }
+
+    /* Hero section */
+    header { display:flex; justify-content:center; align-items:center; height:100vh; padding-top:75px; text-align:center; }
+    header h1 {
+      font-family:'Orbitron',sans-serif;
+      font-size:2.5rem;
+      letter-spacing:1.8px;
+      text-transform:uppercase;
+      text-shadow:0 0 14px rgba(0,191,255,0.6);
+    }
+
+    /* Sections */
+    section { padding:70px 20px; max-width:850px; margin:0 auto; }
+    section h2 { font-family:'Orbitron',sans-serif; font-size:1.8rem; margin-bottom:18px; text-align:center; }
+    section p { display:none; } /* isi teks dihapus */
+
+    /* Footer */
+    footer {
+      padding: 30px 20px;
+      text-align: center;
+      font-size: 0.9rem;
+      background: rgba(20,20,40,0.25);
+      backdrop-filter: blur(12px) saturate(150%);
+      border-top: 1px solid rgba(255,255,255,0.2);
+      margin-top: 40px;
+    }
+    footer p { color: #aaa; }
+
+    /* Animasi nav muncul */
+    .show { opacity:1 !important; transform:translateX(0) !important; }
+  </style>
+</head>
+<body>
+  <!-- Stars -->
+  <div class="stars" id="stars"></div>
+
+  <!-- Navbar -->
+  <nav>
+    <ul>
+      <li><a href="#beranda">Beranda</a></li>
+      <li><a href="#profil">Profil</a></li>
+      <li><a href="#galeri">Galeri</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+  </nav>
+
+  <!-- Hero -->
+  <header id="beranda">
+    <h1>Web Kelas 8.8</h1>
+  </header>
+
+  <!-- Sections -->
+  <section id="profil">
+    <h2>Profil Kelas</h2>
+  </section>
+
+  <section id="galeri">
+    <h2>Galeri</h2>
+  </section>
+
+  <section id="kontak">
+    <h2>Kontak</h2>
+    <p>Hubungi kami untuk informasi lebih lanjut tentang kelas 8.8.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p>© 2025 Web Kelas 8.8. Semua hak cipta dilindungi.</p>
+  </footer>
+
+  <script>
+    // Generate stars
+    const starsContainer = document.getElementById("stars");
+    for(let i=0;i<150;i++){
+      const star = document.createElement("div");
+      star.className="star";
+      star.style.top=Math.random()*200+"%";
+      star.style.left=Math.random()*200+"%";
+      star.style.animationDuration=(2+Math.random()*3)+"s";
+      starsContainer.appendChild(star);
+    }
+
+    // Parallax scroll
+    window.addEventListener("scroll",()=>{
+      const offset=window.scrollY*0.2;
+      starsContainer.style.transform=`translateY(${offset}px)`;
+    });
+
+    // Navbar appear animation
+    window.addEventListener("DOMContentLoaded",()=>{
+      document.querySelectorAll("nav a").forEach((link,i)=>{
+        setTimeout(()=>link.classList.add("show"),i*150);
+      });
+    });
+  </script>
+</body>
+</html>
